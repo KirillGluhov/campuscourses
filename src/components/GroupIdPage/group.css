@@ -1,0 +1,69 @@
+.maxwidth {
+    width: 100%;
+}
+
+.column.one {
+    flex-direction: column;
+}
+
+.end {
+    justify-content: end;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.cardWithName:hover {
+    background-color: #DDE7EE;
+    cursor: pointer;
+}
+
+.cardWithName:active {
+    background-color: #9FA6AD;
+}
+
+.row.one {
+    flex-direction: row;
+}
+
+.m-0.one {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.ml.one {
+    margin-left: 1rem;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.heightmax {
+    height: 100%;
+}
+
+.maxwidth.p-0 {
+    padding: 0px;
+}
+
+.p-16.withoutright {
+    padding: 16px 0px 16px 16px;
+}
+
+.p-16.withoutleft {
+    padding: 16px 16px 16px 0px;
+}
+
+.endAndStart {
+    justify-content: space-between;
+}
+
+.buttontodelete.ml-8 {
+    margin-left: 16px;
+}
+
+.delete.gray {
+    background-color: #DDE7EE;
+}

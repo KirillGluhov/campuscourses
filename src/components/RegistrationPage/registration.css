@@ -1,0 +1,22 @@
+.borderBlue
+{
+    border: 1px;
+    border-color: var(--joy-palette-primary-500);
+    border-style: solid;
+}
+
+.maxWidth
+{
+    width: 100%;
+}
+
+.m-2
+{
+    margin-bottom: 16;
+}
+
+.minwidth-400
+{
+    min-width: 400px;
+
+}

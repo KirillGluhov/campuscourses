@@ -1,0 +1,105 @@
+body {
+    margin: 0px;
+}
+
+.mainColor {
+    background-color: #0B6BCB;
+}
+
+.secondColor {
+    background-color: green;
+}
+
+.startAndEnd {
+    justify-content: space-between;
+}
+
+.leftEdge {
+    justify-content: end;
+}
+
+.whiteText {
+    color: white;
+}
+
+.whiteText.brand {
+    color: white;
+}
+
+.stretchWidthInAllWidth {
+    flex-grow: 1;
+}
+
+.dontChangeWidth {
+    flex-shrink: 0;
+}
+
+.whiteText.link:hover {
+    color: black;
+    text-decoration-line: none;
+}
+
+.px-8 {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+}
+
+.nav-link.link {
+    color: white;
+}
+
+.brand.flex {
+    display: flex;
+}
+
+.links {
+    animation: fadeStart 0.5s ease;
+}
+
+.links.hidden {
+    pointer-events: none;
+    display: none;
+}
+
+@keyframes fadeStart {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.deletePaddings {
+    padding: 0px !important;
+    --Icon-fontSize: 2rem !important;
+}
+
+.minweight-270 {
+    min-width: 270px !important;
+}
+
+.minwidth-600 {
+    min-width: 600px !important;
+}
+
+.mainColor.footer {
+    background-color: #0B6BCB;
+}
+
+.whiteText.logo {
+    color: white;
+}
+
+.min-width400 {
+    min-width: 400px;
+}
+
+.minwidth-300 {
+    min-width: 300px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}

@@ -1,0 +1,15 @@
+.eighty
+{
+    width: 80%;
+
+}
+
+.row
+{
+    flex-direction: row !important;
+}
+
+.end
+{
+    justify-content: end;
+}

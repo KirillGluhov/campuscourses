@@ -1,0 +1,10 @@
+.centeredText
+{
+    justify-content: center;
+    text-align: center;
+}
+
+.minwidth-500
+{
+    min-width: 500px;
+}

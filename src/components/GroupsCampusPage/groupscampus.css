@@ -1,0 +1,37 @@
+.maximum {
+    width: 100%;
+}
+
+.veryHeight {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.hover:hover {
+    background-color: #E3EFFB;
+    cursor: pointer;
+}
+
+.hover:active {
+    background-color: #C7DFF7;
+}
+
+.yellow.specified {
+    background-color: #ffc107;
+}
+
+.yellow.specified:hover {
+    background-color: #c69504;
+}
+
+.end {
+    justify-content: end;
+}
+
+.between {
+    justify-content: space-between;
+}
+
+.wrap-text {
+    overflow-wrap: break-word;
+}

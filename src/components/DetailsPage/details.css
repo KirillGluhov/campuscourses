@@ -1,0 +1,129 @@
+.maxwidth {
+    width: 100%;
+}
+
+.yellow.specified {
+    background-color: #ffc107;
+}
+
+.yellow.specified:hover {
+    background-color: #c69504;
+}
+
+.withoutround.maxwidth {
+    border-radius: 0px;
+    flex-direction: row;
+    border-width: 0px 1px 1px 1px;
+}
+
+.withoutround.maxwidth.upround {
+    border-radius: 8px 8px 0px 0px;
+    border-width: 1px 1px 1px 1px;
+}
+
+.withoutround.maxwidth.downround {
+    border-radius: 0px 0px 8px 8px;
+}
+
+.m-8 {
+    margin-bottom: 8px;
+}
+
+.mt-8 {
+    margin-top: 8px;
+}
+
+.Mui-selected.maxwidth.tabName {
+    background-color: white;
+    border-color: #D5DDE6;
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-radius: 8px 8px 0px 0px;
+    font-weight: bold;
+}
+
+.maxwidth.tabName {
+    border-color: #D5DDE6;
+    border-style: solid;
+    border-width: 0px 0px 1px 0px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.panel {
+    border-color: #D5DDE6;
+    border-style: solid;
+    border-width: 0px 1px 1px 1px;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.wrap-text {
+    overflow-wrap: break-word;
+}
+
+.p-8.danger {
+    background-color: #F09898;
+}
+
+.p-8 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.mt-8.listOfElements {
+    margin-top: 8px;
+}
+
+.red.chipWithNumber {
+    background-color: #DC3545;
+    color: white;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.green.main.whiteText {
+    background-color: #198754;
+    color: white;
+
+}
+
+.Accepted.wrap-text {
+    color: #198754;
+}
+
+.Declined.wrap-text {
+    color: #DC3545;
+}
+
+.InQueue.wrap-text {
+    color: #0B6BCB;
+}
+
+.NotDefined.specialcolor {
+    background-color: #636B74;
+    color: white;
+}
+
+.Passed.specialcolor {
+    background-color: #198754;
+    color: white;
+}
+
+.Failed.specialcolor {
+    background-color: #DC3545;
+    color: white;
+}
+
+.flex.text {
+    display: flex;
+}
+
+.m-0.one.mr {
+    margin-right: 8px;
+}
+
+.m-0.one {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
