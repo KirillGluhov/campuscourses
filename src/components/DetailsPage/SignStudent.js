@@ -2,10 +2,12 @@ import { Button } from "@mui/joy";
 import axios from "axios";
 import { baseUrl } from "../../const/const-urls";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
-function SignStudent({info, fetchData, setSigned, setSnack})
+function SignStudent({fetchData, setSigned, setSnack})
 {
     let navigate = useNavigate();
+    const info = useSelector(state => state.auth.info);
     
     function handleClick()
     {

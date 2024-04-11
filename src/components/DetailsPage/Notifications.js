@@ -10,6 +10,8 @@ function Notifications({info, fetchData})
     const [isTeacher, setTeacher] = useState(checkTeacher(info));
     const [isAdmin, setAdmin] = useState(checkRole("isAdmin"));
 
+    
+
     return (<>
         {
             (isAdmin || isTeacher) 

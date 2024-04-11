@@ -1,14 +1,16 @@
-import { Typography, Grid, Button, Tooltip, Modal, ModalDialog, ModalClose, FormLabel, Snackbar, Input, Radio, RadioGroup} from "@mui/joy";
+import { Typography, Grid, Button, Tooltip, Modal, ModalDialog, ModalClose, FormLabel, Snackbar, Input, Radio, RadioGroup, LinearProgress} from "@mui/joy";
 import { useEffect, useState } from "react";
 import checkRole from "../../functions/checkRole";
 import axios from "axios";
 import { baseUrl } from "../../const/const-urls";
 import ReactQuill from "react-quill";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
-function Name({info, fetchData})
+function Name({fetchData})
 {
     let navigate = useNavigate();
+    const info = useSelector(state => state.auth.info);
 
     const [isTeacher, setTeacher] = useState(false);
     const [isAdmin, setAdmin] = useState(checkRole("isAdmin"));
@@ -18,12 +20,12 @@ function Name({info, fetchData})
     const [currentTeacher, setCurrentTeacher] = useState(null);
 
     const [infoState, setInfoState] = useState({
-        name: info.name,
-        startYear: info.startYear,
-        requirements: info.requirements,
-        annotations: info.annotations,
-        maximumStudentsCount: info.maximumStudentsCount,
-        semester: info.semester,
+        name: null,
+        startYear: null,
+        requirements: null,
+        annotations: null,
+        maximumStudentsCount: null,
+        semester: null,
         mainTeacherId: "00000000-0000-0000-0000-000000000000"
     })
 
@@ -352,13 +354,30 @@ function Name({info, fetchData})
 
     useEffect(() => {
         checkIsTeacher();
-    }, []);
+        if (info) {
+            setInfoState({
+              name: info.name || null,
+              startYear: info.startYear || null,
+              requirements: info.requirements || null,
+              annotations: info.annotations || null,
+              maximumStudentsCount: info.maximumStudentsCount || null,
+              semester: info.semester || null,
+              mainTeacherId: "00000000-0000-0000-0000-000000000000"
+            });
+          }
+    }, [info]);
 
     return (
     <Grid container className="maxwidth">
         <Grid className="maxwidth" container justifyContent="space-between" mb={1} mt={1}>
             <Grid container alignContent="flex-end">
-                <Typography level="h1">{info.name}</Typography>
+                {
+                    info 
+                    ? 
+                    <Typography level="h1">{info.name}</Typography> 
+                    : 
+                    <LinearProgress />
+                }
             </Grid>
         </Grid>
         <Grid className="maxwidth" container justifyContent="space-between" mb={1}>

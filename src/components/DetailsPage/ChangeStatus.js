@@ -3,23 +3,28 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../const/const-urls";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
-function ChangeStatus({info, fetchData})
+function ChangeStatus({fetchData})
 {
     let navigate = useNavigate();
+    const info = useSelector(state => state.auth.info);
     
     const [state, setState] = useState(
         {
-            status: info.status
+            status: null
         }
     );
 
     useEffect(() => {
-        setState(prevState => ({
-            ...prevState,
-            status: info.status
-        }));
-    }, []);
+        if (info)
+        {
+            setState(prevState => ({
+                ...prevState,
+                status: info.status
+            }));
+        }
+    }, [info]);
 
     const [open, setOpen] = useState(false);
 

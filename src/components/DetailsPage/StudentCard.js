@@ -1,4 +1,4 @@
-import {ListItem, Grid, Chip, Typography} from "@mui/joy";
+import {ListItem, Grid, Chip, Typography, LinearProgress} from "@mui/joy";
 import { StudentStatus } from "../../const/const-studentstatuses";
 import { useEffect, useState } from "react";
 import checkRole from "../../functions/checkRole";
@@ -6,9 +6,11 @@ import { chooseMark } from "../../functions/chooseMark";
 import Result from "./Result";
 import { Results } from "../../const/const-result";
 import RequestButton from "./RequestButton";
+import { useDispatch, useSelector } from 'react-redux';
 
-function StudentCard({student, fetchData, info})
+function StudentCard({student, fetchData})
 {
+    const info = useSelector(state => state.auth.info);
 
     const [isTeacher, setTeacher] = useState(false);
     const [isYou, setIsYou] = useState(false);
@@ -32,9 +34,12 @@ function StudentCard({student, fetchData, info})
     }
 
     useEffect(() => {
-        checkIsTeacher();
-        defineIsYou();
-    })
+        if (info)
+        {
+            checkIsTeacher();
+            defineIsYou();
+        }
+    }, [info])
 
     function defineIsYou()
     {
@@ -75,11 +80,11 @@ function StudentCard({student, fetchData, info})
                         <Grid xs={6}>
                             <Grid container>
                                 {
-                                    (isTeacher || isAdmin)
+                                    info ? ((isTeacher || isAdmin)
                                     ? 
                                     <Result student={student} id={info.id} fetchData={fetchData} type={Results.MIDTERM}/>
                                     : 
-                                    <Typography>Промежуточная аттестация</Typography>
+                                    <Typography>Промежуточная аттестация</Typography>) : <LinearProgress/>
                                 }
                                 <Typography mx={1}>-</Typography>
                             </Grid>
@@ -88,11 +93,11 @@ function StudentCard({student, fetchData, info})
                         <Grid xs={6}>
                             <Grid container>
                                 {
-                                    (isTeacher || isAdmin) 
+                                    info ? ((isTeacher || isAdmin) 
                                     ? 
                                     <Result student={student} id={info.id} fetchData={fetchData} type={Results.FINAL}/>
                                     : 
-                                    <Typography>Финальная аттестация</Typography>
+                                    <Typography>Финальная аттестация</Typography>) : <LinearProgress/>
                                 }
                                 <Typography mx={1}>-</Typography>
                             </Grid>
@@ -131,10 +136,13 @@ function StudentCard({student, fetchData, info})
                         </Typography>
                         <Typography className="wrap-text">{student.email}</Typography>
                     </Grid>
-                    <Grid gap={2} container>
-                        <RequestButton fetchData={fetchData} student={student} id={info.id} type={StudentStatus.ACCEPTED}/>
-                        <RequestButton fetchData={fetchData} student={student} id={info.id} type={StudentStatus.DECLINED}/>
-                    </Grid>
+                    {
+                        info ? 
+                        <Grid gap={2} container>
+                            <RequestButton fetchData={fetchData} student={student} id={info.id} type={StudentStatus.ACCEPTED}/>
+                            <RequestButton fetchData={fetchData} student={student} id={info.id} type={StudentStatus.DECLINED}/>
+                        </Grid> : <LinearProgress/>
+                    }
                 </Grid>
             </ListItem>
             :

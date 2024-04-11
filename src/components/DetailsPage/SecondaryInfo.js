@@ -1,8 +1,10 @@
-import { Tabs, TabList, Tab, TabPanel, Chip, Typography } from "@mui/joy";
+import { Tabs, TabList, Tab, TabPanel, Chip, Typography, LinearProgress } from "@mui/joy";
 import Notifications from "./Notifications";
+import { useDispatch, useSelector } from 'react-redux';
 
-function SecondaryInfo({info, fetchData})
+function SecondaryInfo({fetchData})
 {
+    const info = useSelector(state => state.auth.info);
 
     function displayNumberOfNotifications()
     {
@@ -36,13 +38,13 @@ function SecondaryInfo({info, fetchData})
                 </Tab>
             </TabList>
             <TabPanel className="panel" value={0}>
-                <div dangerouslySetInnerHTML={{ __html: info.requirements }} />
+                {info ? <div dangerouslySetInnerHTML={{ __html: info.requirements }} /> : <LinearProgress/>}
             </TabPanel>
             <TabPanel className="panel" value={1}>
-                <div dangerouslySetInnerHTML={{ __html: info.annotations }} />
+                {info ? <div dangerouslySetInnerHTML={{ __html: info.annotations }} /> : <LinearProgress/>}
             </TabPanel>
             <TabPanel className="panel" value={2}>
-                <Notifications info={info} fetchData={fetchData}/>
+                {info ? <Notifications info={info} fetchData={fetchData}/> : <LinearProgress/>}
             </TabPanel>
         </Tabs>
     );

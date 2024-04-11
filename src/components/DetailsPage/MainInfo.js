@@ -1,4 +1,4 @@
-import { CardContent, Card, Grid, Typography, Snackbar } from "@mui/joy";
+import { CardContent, Card, Grid, Typography, Snackbar, LinearProgress } from "@mui/joy";
 import { defineStartAndEndYear } from "../../functions/defineStartAndEndYear";
 import { chooseSemester } from "../../functions/chooseSemester";
 import { chooseStatus } from "../../functions/chooseStatus";
@@ -7,17 +7,24 @@ import checkRole from "../../functions/checkRole";
 import { useEffect, useState } from "react";
 import { Status } from "../../const/const-statuses";
 import ChangeStatus from "./ChangeStatus";
+import { useDispatch, useSelector } from 'react-redux';
 import SignStudent from "./SignStudent";
 
-function MainInfo({info, fetchData})
+function MainInfo({fetchData})
 {
     const [isTeacher, setTeacher] = useState(false);
     const [isAdmin, setAdmin] = useState(checkRole("isAdmin"));
-    const [isSigned, setSigned] = useState(checkSigned());
+    const [isSigned, setSigned] = useState(false);
+
+    const info = useSelector(state => state.auth.info);
 
     useEffect(() => {
-        checkTeacher()
-    });
+        if (info)
+        {
+            checkTeacher();
+            checkSigned();
+        }
+    }, [info]);
 
     function checkTeacher()
     {
@@ -58,10 +65,12 @@ function MainInfo({info, fetchData})
         {
             if (students[student].email === localStorage.getItem("email"))
             {
+                setSigned(true);
                 return true;
             }
         }
 
+        setSigned(false);
         return false;
     }
 
@@ -74,20 +83,23 @@ function MainInfo({info, fetchData})
                     </Grid>
                     <Grid>
                         <CardContent>
-                            <Typography color={chooseColor(info.status)}>{chooseStatus(info.status)}</Typography>
+                            {info ? <Typography color={chooseColor(info.status)}>{chooseStatus(info.status)}</Typography> : <LinearProgress/>}
                         </CardContent>
                     </Grid>
                 </Grid>
                 <Grid xs={6} container justifyContent="end">
                     <Grid container>
                         {
-                            (isAdmin || isTeacher) ? 
-                            <ChangeStatus info={info} fetchData={fetchData}/>
+                            info ?
+                                ((isAdmin || isTeacher) ? 
+                                <ChangeStatus fetchData={fetchData}/>
+                                : 
+                                (info.status === Status.OPEN.Eng && !isSigned) ? 
+                                <SignStudent fetchData={fetchData} setSigned={setSigned} setSnack={setSnack}/> 
+                                : 
+                                null)
                             : 
-                            (info.status === Status.OPEN.Eng && !isSigned) ? 
-                            <SignStudent info={info} fetchData={fetchData} setSigned={setSigned} setSnack={setSnack}/> 
-                            : 
-                            null
+                            <LinearProgress/>
                         }
                     </Grid>
                 </Grid>
@@ -98,7 +110,7 @@ function MainInfo({info, fetchData})
                         <Typography level="title-lg">Учебный год</Typography>
                     </Grid>
                     <Grid>
-                        <CardContent>{defineStartAndEndYear(info.semester, info.startYear)}</CardContent>
+                        {info ? <CardContent>{defineStartAndEndYear(info.semester, info.startYear)}</CardContent> : <LinearProgress/>}
                     </Grid>
                 </Grid>
                 <Grid xs={6}>
@@ -106,7 +118,7 @@ function MainInfo({info, fetchData})
                         <Typography level="title-lg">Семестр</Typography>
                     </Grid>
                     <Grid>
-                        <CardContent>{chooseSemester(info.semester)}</CardContent>
+                        {info ? <CardContent>{chooseSemester(info.semester)}</CardContent> : <LinearProgress/>}
                     </Grid>
                 </Grid>
             </Card>
@@ -116,7 +128,7 @@ function MainInfo({info, fetchData})
                         <Typography level="title-lg">Всего мест</Typography>
                     </Grid>
                     <Grid>
-                        <CardContent>{info.maximumStudentsCount}</CardContent>
+                        {info ? <CardContent>{info.maximumStudentsCount}</CardContent> : <LinearProgress/>}
                     </Grid>
                 </Grid>
                 <Grid xs={6}>
@@ -124,7 +136,7 @@ function MainInfo({info, fetchData})
                         <Typography level="title-lg">Студентов зачислено</Typography>
                     </Grid>
                     <Grid>
-                        <CardContent>{info.studentsEnrolledCount}</CardContent>
+                        {info ? <CardContent>{info.studentsEnrolledCount}</CardContent> : <LinearProgress/>}
                     </Grid>
                 </Grid>
             </Card>
@@ -134,7 +146,7 @@ function MainInfo({info, fetchData})
                         <Typography level="title-lg">Заявок на рассмотрении</Typography>
                     </Grid>
                     <Grid>
-                        <CardContent>{info.studentsInQueueCount}</CardContent>
+                        {info ? <CardContent>{info.studentsInQueueCount}</CardContent> : <LinearProgress/>}
                     </Grid>
                 </Grid>
             </Card>

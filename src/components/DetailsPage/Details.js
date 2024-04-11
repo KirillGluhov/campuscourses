@@ -6,19 +6,27 @@ import { Grid } from "@mui/joy";
 import MainInfo from "./MainInfo";
 import SecondaryInfo from "./SecondaryInfo";
 import TeachersAndStudents from "./TeachersAndStudents";
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { Actions } from "../../const/const-actions";
 
 function Details()
 {
     let navigate = useNavigate();
 
-    const [info, setInfo] = useState([]);
+    const info = useSelector(state => state.auth.info);
+    const dispatch = useDispatch();
 
     function fetchData()
     {
         axios.get(`${baseUrl}/courses/${window.location.pathname.split("/")[2]}/details`, { headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` } })
         .then(response => {
-            setInfo(response.data);
+
+            dispatch({
+                type: Actions.DEFINE,
+                payload: response.data
+            })
+
         })
         .catch(error => {
             if (error.response.status === 401)
@@ -37,10 +45,10 @@ function Details()
 
     return (
     <Grid container mx={5}>
-        <Name info={info} fetchData={fetchData}/>
-        <MainInfo info={info} fetchData={fetchData}/>
-        <SecondaryInfo info={info} fetchData={fetchData}/>
-        <TeachersAndStudents info={info} fetchData={fetchData}/>
+        <Name fetchData={fetchData}/>
+        <MainInfo fetchData={fetchData}/>
+        <SecondaryInfo fetchData={fetchData}/>
+        <TeachersAndStudents fetchData={fetchData}/>
     </Grid>);
 }
 

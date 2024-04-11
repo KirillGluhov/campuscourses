@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../../const/const-urls";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
 
-function AddTeacher({info, fetchData})
+function AddTeacher({fetchData})
 {
     let navigate = useNavigate();
+    const info = useSelector(state => state.auth.info);
     
     const [snackState, setSnack] = useState({
         color: "success",
